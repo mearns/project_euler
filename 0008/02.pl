@@ -16,15 +16,18 @@ while ($string =~ /(\d)/g) {
     my $d = $1;
 
     push @subseq, $d;
-    if ($#subseq+1 == $length+1) {
-        my $rm = shift @subseq;
+    if ($d == 0) {
         $prod = 1;
-        foreach (@subseq) {
-            $prod *= $_;
-        }
-
-        if ($prod > $highest_prod) {
-            $highest_prod = $prod;
+        @subseq = ();
+    }
+    else {
+        $prod *= $d;
+        if ($#subseq+1 == $length+1) {
+            my $rm = shift @subseq;
+            $prod /= $rm;
+            if ($prod > $highest_prod) {
+                $highest_prod = $prod;
+            }
         }
     }
 }
