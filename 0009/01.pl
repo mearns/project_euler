@@ -4,11 +4,11 @@ use strict;
 use warnings;
 use 5.010;
 
-foreach (333 .. 998) {
+foreach (334 .. 997) {
     my $c = $_;
-    foreach (2 .. $c-1) {
-        my $b = $_;
-        my $a = 1000 - $b - $c;
+    foreach (1 .. 333) {
+        my $a = $_;
+        my $b = 1000 - $a - $c;
         if ($a < $b) {
             if ($a*$a + $b*$b == $c*$c) {
                 my $prod = $a*$b*$c;
