@@ -1,4 +1,25 @@
 #!perl
+#
+##
+# This is optimized considerably compared to the solution in 01.pl.
+# Instead of being O(NM), this is just O(N), so roughly spekaing,
+# 13 times faster.
+#
+# Instead of finding independent products for each subsequence, it does a
+# running product with a sliding window. The trick is to through away the entire
+# window anytime you encounter a 0.
+#
+# So I don't see how you could get any better than O(N), since you have to search the
+# entire sequence. But I'm sure you can still get the actual amount of time down
+# with some clever optimizations.
+#
+# For one thing, I think you could do probably sums instead of products. I'm not
+# confident about that, but I suspect if a sequence of fixed length has a higher product,
+# then it necessarily has a higher sum as well.
+#
+# I thought there might be some clever things to do with sorting the subsequences,
+# but sorting subsequences is going to be worse than O(M), so we're already worse.
+#
 
 use strict;
 use warnings;

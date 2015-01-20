@@ -1,6 +1,13 @@
+#!perl
+
 #This actually gives the solution, which is 23514624000.
 ## But it's very non-optimal.
-#!perl
+#
+# It's a simple brute force search that independently finds the product of every
+# subsequence of length-13 and tracks the largest such product. So if N is the length
+# of the sequence to search and M is the length of the subsequences to take the
+# product of, this is O(NM). A slight optimization is to bail out of the foreach loop
+# that takes the product if $c is ever equal to 0.
 
 use strict;
 use warnings;
