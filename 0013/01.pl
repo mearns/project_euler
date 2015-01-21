@@ -124,36 +124,42 @@ my @lines = split /[\r\n]/, $data;
 
 my @bignums;
 
+my $digit_count = 2;
+my $digit_re = /\d{2}/g;
+my $divisor = 10**$digit_count;
+my $limit = 50 / $digit_count;
+my $digits_needed = 10 / $digit_count;
+
 foreach (@lines) {
     my $line = $_;
-    my @digits = $line =~ /\d{2}/g;
+    my @digits = $line =~ $digit_re;
     push @bignums, \@digits;
 }
 
 my @sum;
 my $carry = 0;
-foreach (1 .. 25) {
-    my $i = 25 - $_;
+foreach (1 .. $limit) {
+    my $i = $limit - $_;
     my $digit_sum = $carry;
     foreach (@bignums) {
         my $d = $_->[$i];
         $digit_sum += $d;
     }
-    $sum[$i] = $digit_sum % 100;
-    $carry = int($digit_sum / 100);
+    $sum[$i] = $digit_sum % $divisor;
+    $carry = int($digit_sum / $divisor);
 }
 while ($carry) {
-    unshift @sum, ($carry % 100);
-    $carry = int($carry / 100);
+    unshift @sum, ($carry % $divisor);
+    $carry = int($carry / $divisor);
 }
 
-my @expected = '5537376230390876637302048746832985971773659831892672' =~ /\d{2}/g;
+my @expected = '5537376230390876637302048746832985971773659831892672' =~ $digit_re;
 if (@sum == @expected) {
     say "Correct!";
 }
 else {
     say "Wrong!";
 }
-say join "", @expected[0..5];
+say join "", @expected[0..$digits_needed];
 
 
