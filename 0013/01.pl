@@ -125,8 +125,8 @@ my @lines = split /[\r\n]/, $data;
 my @bignums;
 
 my $digit_count = 1;
-my $digit_re = qr/\d/;
 
+my $digit_re = qr/\d{$digit_count}/;
 my $divisor = 10**$digit_count;
 my $limit = 50 / $digit_count;
 my $digits_needed = 10 / $digit_count;
