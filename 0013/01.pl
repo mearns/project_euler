@@ -124,12 +124,13 @@ my @lines = split /[\r\n]/, $data;
 
 my @bignums;
 
-my $digit_count = 2;
+my $digit_count = 5;
 
 my $digit_re = qr/\d{$digit_count}/;
 my $divisor = 10**$digit_count;
 my $limit = 50 / $digit_count;
 my $digits_needed = 10 / $digit_count;
+my $print_fmt = "%0" . $digit_count . "d";
 
 foreach (@lines) {
     my $line = $_;
@@ -156,7 +157,7 @@ while ($carry) {
 
 my $expected = '5537376230390876637302048746832985971773659831892672';
 
-my $answer = join "", map {sprintf "%02d", $_ } @sum;
+my $answer = join "", map {sprintf $print_fmt, $_ } @sum;
 my $correct = $answer == $expected;
 
 if ($correct) {
