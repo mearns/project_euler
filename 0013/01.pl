@@ -124,7 +124,7 @@ my @lines = split /[\r\n]/, $data;
 
 my @bignums;
 
-my $digit_count = 1;
+my $digit_count = 2;
 
 my $digit_re = qr/\d{$digit_count}/;
 my $divisor = 10**$digit_count;
@@ -155,13 +155,16 @@ while ($carry) {
 }
 
 my $expected = '5537376230390876637302048746832985971773659831892672';
+@sum = map {sprintf("%02d", $_)} @sum;
 my $string = join "", @sum;
 if ($string == $expected) {
     say "Correct!";
 }
 else {
     say "Wrong!";
+    say "Exp: ", substr($expected, 0, 10), '_', substr($expected, 10);
 }
-say substr $string, 0, 10;
+say "Got: ", substr($string, 0, 10), '_', substr($string, 10);
+
 
 
