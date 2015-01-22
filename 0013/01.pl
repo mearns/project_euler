@@ -8,7 +8,7 @@
 #
 # The sum is: 5537376230390876637302048746832985971773659831892672
 # And when it asks for the "first ten digits", it's talking about the
-# 10 most sig, so 5537...039
+# 10 most sig, so 5537376230.
 #
 
 use strict;
@@ -124,15 +124,16 @@ my @lines = split /[\r\n]/, $data;
 
 my @bignums;
 
-my $digit_count = 2;
-my $digit_re = /\d{2}/g;
+my $digit_count = 1;
+my $digit_re = qr/\d/;
+
 my $divisor = 10**$digit_count;
 my $limit = 50 / $digit_count;
 my $digits_needed = 10 / $digit_count;
 
 foreach (@lines) {
     my $line = $_;
-    my @digits = $line =~ $digit_re;
+    my @digits = $line =~ m/$digit_re/g;
     push @bignums, \@digits;
 }
 
@@ -153,13 +154,14 @@ while ($carry) {
     $carry = int($carry / $divisor);
 }
 
-my @expected = '5537376230390876637302048746832985971773659831892672' =~ $digit_re;
-if (@sum == @expected) {
+my $expected = '5537376230390876637302048746832985971773659831892672';
+my $string = join "", @sum;
+if ($string == $expected) {
     say "Correct!";
 }
 else {
     say "Wrong!";
 }
-say join "", @expected[0..$digits_needed];
+say substr $string, 0, 10;
 
 
