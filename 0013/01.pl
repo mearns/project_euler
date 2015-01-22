@@ -130,7 +130,7 @@ my $digit_re = qr/\d{$digit_count}/;
 my $divisor = 10**$digit_count;
 my $limit = 50 / $digit_count;
 my $digits_needed = 10 / $digit_count;
-my $print_fmt = "%0" . $digit_count . "d";
+my $print_fmt = "%0${digit_count}d";
 
 foreach (@lines) {
     my $line = $_;
