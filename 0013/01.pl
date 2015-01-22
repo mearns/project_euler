@@ -147,24 +147,28 @@ foreach (1 .. $limit) {
         $digit_sum += $d;
     }
     $sum[$i] = $digit_sum % $divisor;
-    $carry = int($digit_sum / $divisor);
+    $carry = int ($digit_sum / $divisor);
 }
 while ($carry) {
-    unshift @sum, ($carry % $divisor);
-    $carry = int($carry / $divisor);
+    unshift @sum, $carry % $divisor;
+    $carry = int ($carry / $divisor);
 }
 
 my $expected = '5537376230390876637302048746832985971773659831892672';
-@sum = map {sprintf("%02d", $_)} @sum;
-my $string = join "", @sum;
-if ($string == $expected) {
+
+my $answer = join "", map {sprintf "%02d", $_ } @sum;
+my $correct = $answer == $expected;
+
+if ($correct) {
     say "Correct!";
 }
 else {
     say "Wrong!";
-    say "Exp: ", substr($expected, 0, 10), '_', substr($expected, 10);
+    say "Exp: ", substr($expected, 0, 10), '_', substr $expected, 10;
 }
-say "Got: ", substr($string, 0, 10), '_', substr($string, 10);
+say "Got: ", substr($answer, 0, 10), '_', substr $answer, 10;
+
+exit $correct ? 0 : 1;
 
 
 
